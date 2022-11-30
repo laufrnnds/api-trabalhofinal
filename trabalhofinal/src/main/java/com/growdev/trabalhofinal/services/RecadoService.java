@@ -55,32 +55,32 @@ public class RecadoService {
         }
     }
 
-    @Transactional(readOnly = true)
-    public List<RecadoReadDTO> listarIdUserR(Long id){
-        try{
-            List<Recado> lista = repository.findAll();
-            List<RecadoReadDTO> listaDTO =  lista.stream().map(rcd -> new RecadoReadDTO(rcd, rcd.getUsuario())).collect(Collectors.toList());
-            List<RecadoReadDTO> recadosAchadosDTO = new ArrayList<>();
-
-            Recado rcd = repository.findById(id).get();
-            for (RecadoDTO recado: listaDTO) {
-
-                if( recado.getUser().getId_usuario() == rcd.getUsuario().getId_usuario()){
-                    recadosAchadosDTO.add((RecadoReadDTO) recado);
-                }
-                else {
-                    recadosAchadosDTO.add((RecadoReadDTO) recado);
-                }
-
-            }
-            return recadosAchadosDTO;
-        }
-        catch(EntityNotFoundIdException e){
-            throw new EntityNotFoundIdException("Recado não encontrado");
-        }catch(BadRequestException e){
-            throw new BadRequestException("Requisição inválida");
-        }
-    }
+//    @Transactional(readOnly = true)
+//    public List<RecadoReadDTO> listarIdUserR(Long id){
+//        try{
+//            List<Recado> lista = repository.findAll();
+//            List<RecadoReadDTO> listaDTO =  lista.stream().map(rcd -> new RecadoReadDTO(rcd, rcd.getUsuario())).collect(Collectors.toList());
+//            List<RecadoReadDTO> recadosAchadosDTO = new ArrayList<>();
+//
+//            Recado rcd = repository.findById(id).get();
+//            for (RecadoDTO recado: listaDTO) {
+//
+//                if( recado.getUser().getId_usuario() == rcd.getUsuario().getId_usuario()){
+//                    recadosAchadosDTO.add((RecadoReadDTO) recado);
+//                }
+//                else {
+//                    recadosAchadosDTO.add((RecadoReadDTO) recado);
+//                }
+//
+//            }
+//            return recadosAchadosDTO;
+//        }
+//        catch(EntityNotFoundIdException e){
+//            throw new EntityNotFoundIdException("Usuario não encontrado");
+//        }catch(BadRequestException e){
+//            throw new BadRequestException("Requisição inválida");
+//        }
+//    }
 
     public List<RecadoReadDTO> BuscarRecado(String busca, String operacao){
         List<Recado> lista = repository.findAll();
@@ -156,8 +156,8 @@ public class RecadoService {
     public RecadoDTO atualizarR( RecadoDTO dto, Long id){
         try{
             Recado entity = repository.findById(id).get();
-            entity.setDescricao((dto.getDescricao()));
-            entity.setDetalhamento((dto.getDetalhamento()));
+            entity.setDescricao(dto.getDescricao());
+            entity.setDetalhamento(dto.getDetalhamento());
             entity.setStatus(dto.getStatus());
             entity.preupdate();
             // busca o usuario apartir do id_usuario do dto;

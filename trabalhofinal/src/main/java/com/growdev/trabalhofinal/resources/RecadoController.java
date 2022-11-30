@@ -34,11 +34,11 @@ public class RecadoController {
         RecadoDTO recado = service.listarIdR(id);
         return ResponseEntity.ok(recado);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<List<RecadoReadDTO>> readUserR(@PathVariable("id") Long id){
-        List<RecadoReadDTO> listaRecados = service.listarTodosR();
-        return ResponseEntity.ok(listaRecados);
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<List<RecadoReadDTO>> findUserR(@PathVariable("id") Long id){
+//        List<RecadoReadDTO> listaRecados = service.listarIdUserR(id);
+//        return ResponseEntity.ok(listaRecados);
+//    }
 
     @GetMapping("/filter")
     public ResponseEntity<List<RecadoReadDTO>> filter(@RequestParam(value = "busca")  String busca, @RequestParam(value = "operacao") String operacao ){
